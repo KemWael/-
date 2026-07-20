@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سَنَد | صندوق تكافل الزواج</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Amiri:wght@400;700&display=swap');
+
+:root{
+  --emerald-deep:#0a3d34;
+  --emerald:#0f5c4c;
+  --gold:#c9a86a;
+  --gold-bright:#e8c988;
+  --cream:#f6f2e9;
+  --glass-bg:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.18);
+  --ink:#0d2620;
+  --danger:#a8493a;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Tajawal', sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(201,168,106,0.15), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(15,92,76,0.4), transparent 50%),
+    linear-gradient(160deg, #071a16 0%, #0a3d34 45%, #0d2620 100%);
+  color:var(--cream);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(232,201,136,0.06) 0%, transparent 25%),
+    radial-gradient(circle at 85% 80%, rgba(232,201,136,0.05) 0%, transparent 30%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* floating 3D orbs */
+.orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(2px);
+  pointer-events:none;
+  z-index:0;
+  opacity:0.5;
+  animation:float 18s ease-in-out infinite;
+}
+.orb1{width:280px;height:280px;top:8%;right:-80px;background:radial-gradient(circle at 30% 30%, rgba(232,201,136,0.35), rgba(15,92,76,0.05));animation-duration:22s;}
+.orb2{width:180px;height:180px;bottom:15%;left:-60px;background:radial-gradient(circle at 30% 30%, rgba(15,92,76,0.5), transparent);animation-duration:26s;animation-delay:-6s;}
+.orb3{width:120px;height:120px;top:45%;left:5%;background:radial-gradient(circle at 30% 30%, rgba(232,201,136,0.25), transparent);animation-duration:14s;animation-delay:-3s;}
+@keyframes float{
+  0%,100%{transform:translateY(0) translateX(0) rotate(0deg);}
+  33%{transform:translateY(-40px) translateX(20px) rotate(6deg);}
+  66%{transform:translateY(20px) translateX(-25px) rotate(-4deg);}
+}
+
+.container{max-width:1100px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+/* NAV */
+nav{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  background:rgba(10,30,26,0.55);
+  border-bottom:1px solid var(--glass-border);
+  padding:16px 0;
+}
+nav .container{display:flex; align-items:center; justify-content:space-between;}
+.logo{font-family:'Amiri', serif; font-size:1.6rem; font-weight:700; color:var(--gold-bright); display:flex; align-items:center; gap:10px;}
+.logo span{font-size:0.85rem; font-family:'Tajawal'; font-weight:400; color:var(--cream); opacity:0.65;}
+.nav-links{display:flex; gap:28px; font-size:0.95rem;}
+.nav-links a{color:var(--cream); text-decoration:none; opacity:0.75; transition:opacity .25s, color .25s;}
+.nav-links a:hover{opacity:1; color:var(--gold-bright);}
+
+/* HERO */
+.hero{
+  min-height:92vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+  padding:100px 24px 60px;
+  position:relative;
+}
+.hero-eyebrow{
+  font-size:0.85rem; letter-spacing:0.15em; color:var(--gold-bright);
+  border:1px solid rgba(232,201,136,0.35); border-radius:100px;
+  padding:8px 22px; margin-bottom:28px; backdrop-filter:blur(8px);
+  background:rgba(232,201,136,0.06);
+}
+.hero h1{
+  font-family:'Amiri', serif;
+  font-size:clamp(2.4rem, 6vw, 4.4rem);
+  line-height:1.25; font-weight:700; max-width:900px;
+  background:linear-gradient(100deg, var(--cream) 20%, var(--gold-bright) 55%, var(--cream) 80%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:24px;
+}
+.hero p.sub{
+  font-size:1.15rem; max-width:640px; opacity:0.85; line-height:1.9; margin-bottom:40px;
+}
+.hero-cta{display:flex; gap:16px; flex-wrap:wrap; justify-content:center;}
+
+.btn{
+  padding:15px 34px; border-radius:16px; font-size:1rem; font-weight:700;
+  cursor:pointer; border:none; transition:transform .25s, box-shadow .25s;
+  font-family:'Tajawal';
+}
+.btn-gold{
+  background:linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color:var(--ink); box-shadow:0 8px 30px rgba(201,168,106,0.35);
+}
+.btn-gold:hover{transform:translateY(-3px); box-shadow:0 14px 40px rgba(201,168,106,0.5);}
+.btn-glass{
+  background:var(--glass-bg); border:1px solid var(--glass-border); color:var(--cream);
+  backdrop-filter:blur(14px);
+}
+.btn-glass:hover{transform:translateY(-3px); background:rgba(255,255,255,0.14);}
+
+/* verse card */
+.verse-card{
+  margin-top:60px; max-width:640px; padding:32px 40px;
+  background:var(--glass-bg); border:1px solid var(--glass-border);
+  border-radius:24px; backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform-style:preserve-3d;
+  transition:transform .4s;
+}
+.verse-card:hover{transform:rotateX(2deg) rotateY(-2deg) translateY(-4px);}
+.verse-card p.arabic{font-family:'Amiri', serif; font-size:1.4rem; line-height:2.1; color:var(--gold-bright); margin-bottom:10px;}
+.verse-card p.ref{font-size:0.85rem; opacity:0.6;}
+
+/* SECTIONS */
+section{padding:100px 0; position:relative; scroll-margin-top:90px;}
+.section-head{text-align:center; margin-bottom:60px;}
+.eyebrow-sm{font-size:0.8rem; letter-spacing:0.12em; color:var(--gold-bright); opacity:0.85; margin-bottom:12px;}
+h2{font-family:'Amiri', serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:700; margin-bottom:16px;}
+.section-head p{opacity:0.75; max-width:600px; margin:0 auto; line-height:1.8;}
+
+/* GLASS CARD GRID */
+.grid{display:grid; gap:24px;}
+.grid-3{grid-template-columns:repeat(3, 1fr);}
+.grid-2{grid-template-columns:repeat(2, 1fr);}
+@media(max-width:840px){.grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;}}
+
+.glass-card{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:22px;
+  padding:32px 28px;
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:0 10px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition:transform .4s ease, box-shadow .4s ease, border-color .4s;
+  position:relative;
+  overflow:hidden;
+}
+.glass-card::after{
+  content:''; position:absolute; top:-50%; right:-50%; width:100%; height:100%;
+  background:radial-gradient(circle, rgba(232,201,136,0.12), transparent 70%);
+  opacity:0; transition:opacity .4s;
+}
+.glass-card:hover{transform:translateY(-8px) rotateX(3deg); box-shadow:0 20px 60px rgba(0,0,0,0.35); border-color:rgba(232,201,136,0.4);}
+.glass-card:hover::after{opacity:1;}
+.card-icon{
+  width:52px; height:52px; border-radius:14px; margin-bottom:20px;
+  background:linear-gradient(135deg, rgba(232,201,136,0.25), rgba(15,92,76,0.4));
+  display:flex; align-items:center; justify-content:center; font-size:1.4rem;
+  border:1px solid rgba(232,201,136,0.3);
+}
+.glass-card h3{font-size:1.15rem; margin-bottom:10px; color:var(--gold-bright);}
+.glass-card p{font-size:0.92rem; opacity:0.8; line-height:1.8;}
+
+/* TIMELINE - how it works */
+.flow{display:flex; flex-direction:column; gap:0; position:relative; max-width:760px; margin:0 auto;}
+.flow::before{
+  content:''; position:absolute; top:0; bottom:0; right:27px; width:2px;
+  background:linear-gradient(180deg, var(--gold-bright), transparent);
+  opacity:0.4;
+}
+.flow-step{display:flex; gap:24px; padding:24px 0; align-items:flex-start;}
+.flow-num{
+  width:56px; height:56px; min-width:56px; border-radius:50%;
+  background:var(--glass-bg); border:1px solid var(--gold-bright);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:1.2rem; color:var(--gold-bright);
+  backdrop-filter:blur(10px); z-index:1;
+  box-shadow:0 0 24px rgba(232,201,136,0.25);
+}
+.flow-content h4{font-size:1.1rem; margin-bottom:8px;}
+.flow-content p{opacity:0.78; line-height:1.8; font-size:0.94rem;}
+
+/* CALCULATOR */
+.calc-card{
+  max-width:760px; margin:0 auto;
+  background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:26px;
+  padding:44px; backdrop-filter:blur(24px) saturate(180%);
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+}
+.calc-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:12px;}
+.calc-row label{font-size:0.95rem; opacity:0.85;}
+input[type=range]{width:100%; accent-color:var(--gold-bright);}
+.calc-inputs{display:grid; grid-template-columns:1fr; gap:22px; margin-bottom:32px;}
+.calc-value{font-family:'Amiri'; font-size:1.3rem; color:var(--gold-bright); font-weight:700;}
+.calc-result{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:20px;
+}
+@media(max-width:600px){.calc-result{grid-template-columns:1fr;}}
+.result-box{
+  background:rgba(0,0,0,0.2); border-radius:16px; padding:20px; text-align:center;
+  border:1px solid rgba(232,201,136,0.2);
+}
+.result-box .num{font-family:'Amiri'; font-size:1.8rem; color:var(--gold-bright); font-weight:700;}
+.result-box .lbl{font-size:0.82rem; opacity:0.7; margin-top:6px;}
+
+/* PAYMENT MOCK */
+.pay-tabs{display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap;}
+.pay-tab{
+  flex:1; min-width:140px; padding:16px; border-radius:14px; text-align:center; cursor:pointer;
+  background:rgba(255,255,255,0.05); border:1px solid var(--glass-border);
+  transition:all .3s; font-size:0.9rem; font-weight:700;
+}
+.pay-tab.active{background:linear-gradient(135deg, rgba(232,201,136,0.25), rgba(15,92,76,0.3)); border-color:var(--gold-bright); color:var(--gold-bright);}
+.pay-panel{display:none;}
+.pay-panel.active{display:block; animation:fadein .4s;}
+@keyframes fadein{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+.field{margin-bottom:18px;}
+.field label{display:block; font-size:0.85rem; opacity:0.75; margin-bottom:8px;}
+.field input, .field select{
+  width:100%; padding:14px 16px; border-radius:12px;
+  background:rgba(0,0,0,0.2); border:1px solid var(--glass-border); color:var(--cream);
+  font-family:'Tajawal'; font-size:0.95rem;
+}
+.field input:focus, .field select:focus{outline:none; border-color:var(--gold-bright);}
+.pay-note{
+  font-size:0.82rem; opacity:0.65; margin-top:16px; padding:14px 16px;
+  background:rgba(168,73,58,0.12); border:1px solid rgba(168,73,58,0.35); border-radius:12px; line-height:1.7;
+}
+.pay-note.success{background:rgba(15,92,76,0.2); border-color:rgba(232,201,136,0.35); display:none;}
+
+.num-counter{
+  font-family:'Amiri', serif; font-size:2.4rem; font-weight:700; color:var(--gold-bright);
+  direction:ltr; display:inline-block;
+}
+
+/* GOVERNANCE / TRUST */
+.trust-list{list-style:none; display:flex; flex-direction:column; gap:18px; max-width:700px; margin:0 auto;}
+.trust-list li{
+  display:flex; gap:16px; align-items:flex-start; padding:20px 24px;
+  background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:16px;
+  backdrop-filter:blur(14px);
+}
+.trust-list .mark{color:var(--gold-bright); font-size:1.2rem; margin-top:2px;}
+
+/* FAQ */
+.faq-item{
+  background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:16px;
+  margin-bottom:14px; overflow:hidden; backdrop-filter:blur(14px);
+}
+.faq-q{
+  padding:20px 24px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;
+  font-weight:700; font-size:0.98rem;
+}
+.faq-icon{transition:transform .3s; color:var(--gold-bright); font-size:1.3rem;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{max-height:0; overflow:hidden; transition:max-height .4s ease, padding .4s;}
+.faq-item.open .faq-a{max-height:300px; padding:0 24px 22px;}
+.faq-a p{opacity:0.78; line-height:1.85; font-size:0.92rem;}
+
+footer{
+  text-align:center; padding:60px 24px 40px; opacity:0.6; font-size:0.85rem; border-top:1px solid var(--glass-border);
+}
+footer .du3a{font-family:'Amiri'; color:var(--gold-bright); font-size:1.1rem; margin-bottom:16px; opacity:1;}
+
+@media(max-width:700px){
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<nav>
+  <div class="container">
+    <div class="logo">سَنَد <span>صندوق تكافل الزواج</span></div>
+    <div class="nav-links">
+      <a href="#how">إزاي بيشتغل</a>
+      <a href="#sisters">مسار الرجال والسيدات</a>
+      <a href="#calc">احسب مساهمتك</a>
+      <a href="#counter">الإجمالي المباشر</a>
+      <a href="#pay">وسائل الدفع</a>
+      <a href="#ledger">سجل المساهمين</a>
+      <a href="#trust">الأمان والشفافية</a>
+      <a href="#faq">أسئلة شائعة</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">مبادرة تكافلية مجتمعية</div>
+  <h1>نتكاتف... ليتزوج شبابنا ونُعينهم على نصف الدين</h1>
+  <p class="sub">صندوق شهري بسيط، كل عضو فيه بيدفع مبلغ رمزي، وبيتجمع المبلغ عشان يقف جنب أول عريس محتاج يكمل نص دينه. مش جمعية فلوس عادية، دي شراكة نية وأمانة.</p>
+  <div class="hero-cta">
+    <button class="btn btn-gold" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">إزاي بيشتغل الصندوق</button>
+    <button class="btn btn-glass" onclick="document.getElementById('pay').scrollIntoView({behavior:'smooth'})">انضم دلوقتي</button>
+  </div>
+
+  <div class="verse-card">
+    <p class="arabic">وَأَنكِحُوا۟ ٱلۡأَیَـٰمَىٰ مِنكُمۡ وَٱلصَّـٰلِحِینَ مِنۡ عِبَادِكُمۡ وَإِمَاۤىِٕكُمۡۚ إِن یَكُونُوا۟ فُقَرَاۤءَ یُغۡنِهِمُ ٱللَّهُ مِن فَضۡلِهِۦۗ وَٱللَّهُ وَاسِعٌ عَلِیمࣱ</p>
+    <p class="ref">سورة النور - آية 32</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">الآلية</div>
+      <h2>إزاي الصندوق بيشتغل خطوة بخطوة</h2>
+      <p>نظام واضح ومحدد، كل خطوة فيه موثقة عشان محدش يتضرر وحقوق الجميع محفوظة.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">١</div>
+        <div class="flow-content">
+          <h4>الانضمام للصندوق</h4>
+          <p>أي شخص ينضم من غير شروط مسبقة، ويلتزم بدفع مساهمة شهرية ثابتة (مبدئيًا 300 جنيه) بشكل منتظم.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">٢</div>
+        <div class="flow-content">
+          <h4>تجميع المساهمات</h4>
+          <p>كل المبالغ بتتحول لحساب الصندوق الرسمي (مش حساب شخصي)، ويتم إصدار كشف شهري معلن لكل الأعضاء يوضح الداخل والخارج.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">٣</div>
+        <div class="flow-content">
+          <h4>تقديم طلب الدعم</h4>
+          <p>العضو أو العضوة المقبلين على الزواج يقدّموا صورة قسيمة الزواج (أو إثبات موعد الزواج) مع باقي الأوراق المطلوبة للجنة المراجعة، بلا تفرقة بين الرجال والسيدات في الاستحقاق.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">٤</div>
+        <div class="flow-content">
+          <h4>مراجعة واعتماد الطلب</h4>
+          <p>لجنة من أعضاء الصندوق (مش شخص واحد) بتراجع الطلب وترتّب الأولوية حسب مدة العضوية والاحتياج، بشفافية كاملة أمام الجميع.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">٥</div>
+        <div class="flow-content">
+          <h4>توقيع سند الأمانة</h4>
+          <p>قبل الصرف، يوقّع المستفيد سند أمانة موثّق يوضح التزامه بالاستمرار في الدفع لمدة 3 سنوات، وشرط رد المبلغ كاملاً في حال الطلاق خلال أول سنة.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">٦</div>
+        <div class="flow-content">
+          <h4>الدورة تتكرر</h4>
+          <p>بعد الصرف، الصندوق يواصل التجميع ليصل لعضو تاني محتاج، والدائرة تكبر كل ما زاد عدد الأعضاء الملتزمين.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">القيم الحاكمة</div>
+      <h2>على أي أساس بُني الصندوق</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="glass-card">
+        <div class="card-icon">☾</div>
+        <h3>نية خالصة لوجه الله</h3>
+        <p>الهدف الأساسي إعانة الشباب على إتمام نصف الدين، تصديقًا لحديث النبي ﷺ: «ثلاثة حق على الله عونهم... والناكح يريد العفاف».</p>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">⚖</div>
+        <h3>عدل وشفافية</h3>
+        <p>لا قرار فردي في التوزيع، القرارات جماعية موثقة، وكشف الحساب معلن لكل الأعضاء بشكل دوري.</p>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🤝</div>
+        <h3>أمانة لا تبرّع ضائع</h3>
+        <p>الالتزام بالسداد لمدة 3 سنوات بعد الاستفادة يضمن استمرار الدورة لأكبر عدد ممكن من المستفيدين الجدد.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sisters">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">مسارين منفصلين</div>
+      <h2>صندوق الرجال وصندوق السيدات</h2>
+      <p>مش دعم مختلط، كل مسار له تجميعه ولجنته الخاصة، وكل دورة صرف بتوزّع بالتساوي على ثلاثة مستفيدين ثابتين في نفس المسار.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="glass-card">
+        <div class="card-icon">♂</div>
+        <h3>مسار دعم الرجال</h3>
+        <p>مساهمات أعضاء هذا المسار بتتجمع في وعاء مستقل، ولجنة رجال بتراجع الطلبات وتعتمد ثلاثة عرسان في كل دورة صرف بالتساوي.</p>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">♀</div>
+        <h3>مسار دعم السيدات</h3>
+        <p>مساهمات عضوات هذا المسار بتتجمع في وعاء مستقل تمامًا، ولجنة من السيدات بتراجع الطلبات بخصوصية وتعتمد ثلاث عرائس في كل دورة صرف بالتساوي.</p>
+      </div>
+    </div>
+    <p style="font-size:0.85rem; opacity:0.7; margin-top:32px; line-height:1.8; text-align:center; max-width:640px; margin-left:auto; margin-right:auto;">
+      الفصل بين المسارين بيضمن وضوح الحسابات لكل مجموعة على حدة، وبيحافظ على خصوصية طلبات السيدات أثناء المراجعة.
+    </p>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">احسب بنفسك</div>
+      <h2>مساهمتك هتفرق إزاي؟</h2>
+      <p>كل مسار له حاسبته الخاصة، الناتج بيتقسم بالتساوي على ثلاثة مستفيدين ثابتين في كل دورة صرف.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="calc-card">
+        <h3 style="color:var(--gold-bright); font-family:'Amiri'; font-size:1.3rem; margin-bottom:24px; text-align:center;">♂ مسار دعم الرجال</h3>
+        <div class="calc-inputs">
+          <div>
+            <div class="calc-row">
+              <label>عدد الأعضاء في مسار الرجال</label>
+              <span class="calc-value" id="membersMVal">1,500</span>
+            </div>
+            <input type="range" id="membersM" min="100" max="10000" step="100" value="1500">
+          </div>
+          <div>
+            <div class="calc-row">
+              <label>المساهمة الشهرية للفرد (جنيه)</label>
+              <span class="calc-value" id="contribMVal">300</span>
+            </div>
+            <input type="range" id="contribM" min="100" max="1000" step="50" value="300">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-box">
+            <div class="num" id="monthlyTotalM">0</div>
+            <div class="lbl">إجمالي التجميع الشهري (جنيه)</div>
+          </div>
+          <div class="result-box">
+            <div class="num" id="perPersonM">0</div>
+            <div class="lbl">نصيب كل عريس (جنيه)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <h3 style="color:var(--gold-bright); font-family:'Amiri'; font-size:1.3rem; margin-bottom:24px; text-align:center;">♀ مسار دعم السيدات</h3>
+        <div class="calc-inputs">
+          <div>
+            <div class="calc-row">
+              <label>عدد العضوات في مسار السيدات</label>
+              <span class="calc-value" id="membersWVal">1,500</span>
+            </div>
+            <input type="range" id="membersW" min="100" max="10000" step="100" value="1500">
+          </div>
+          <div>
+            <div class="calc-row">
+              <label>المساهمة الشهرية للفرد (جنيه)</label>
+              <span class="calc-value" id="contribWVal">300</span>
+            </div>
+            <input type="range" id="contribW" min="100" max="1000" step="50" value="300">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-box">
+            <div class="num" id="monthlyTotalW">0</div>
+            <div class="lbl">إجمالي التجميع الشهري (جنيه)</div>
+          </div>
+          <div class="result-box">
+            <div class="num" id="perPersonW">0</div>
+            <div class="lbl">نصيب كل عروسة (جنيه)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem; opacity:0.7; margin-top:28px; line-height:1.8; text-align:center;">
+      كل مسار مستقل بحسابه الخاص، وناتج كل دورة صرف بيتقسم بالتساوي على ثلاثة مستفيدين ثابتين من نفس المسار.
+    </p>
+  </div>
+</section>
+
+<section id="counter">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">مباشر</div>
+      <h2>إجمالي ما تم التبرع به حتى الآن</h2>
+      <p>الأرقام بتتحدّث تلقائيًا مع كل عملية سداد جديدة من سجل المساهمين.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="glass-card" style="text-align:center;">
+        <div class="card-icon" style="margin:0 auto 20px;">Σ</div>
+        <div class="num-counter" id="counterTotal">0</div>
+        <h3 style="margin-top:12px;">إجمالي المبلغ المتبرع به (جنيه)</h3>
+      </div>
+      <div class="glass-card" style="text-align:center;">
+        <div class="card-icon" style="margin:0 auto 20px;">♂</div>
+        <div class="num-counter" id="counterBoys">0</div>
+        <h3 style="margin-top:12px;">مسار دعم الرجال (جنيه)</h3>
+      </div>
+      <div class="glass-card" style="text-align:center;">
+        <div class="card-icon" style="margin:0 auto 20px;">♀</div>
+        <div class="num-counter" id="counterGirls">0</div>
+        <h3 style="margin-top:12px;">مسار دعم السيدات (جنيه)</h3>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:32px; font-size:0.95rem; opacity:0.8;">
+      عدد المساهمين المسجّلين: <strong style="color:var(--gold-bright);" id="counterDonors">0</strong>
+    </p>
+  </div>
+</section>
+
+<section id="pay">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">وسائل السداد</div>
+      <h2>سدّد مساهمتك الشهرية</h2>
+      <p>اختر الوسيلة الأنسب لك. <strong>ملحوظة:</strong> الواجهة دي عرض توضيحي لطريقة السداد المستقبلية، ولسه مربوطاش ببوابة دفع حقيقية.</p>
+    </div>
+    <div class="calc-card">
+      <div class="field" style="margin-bottom:28px;">
+        <label style="font-size:0.95rem; margin-bottom:12px;">تبرعك موجّه لأي مسار؟</label>
+        <div class="pay-tabs" id="fundTabs">
+          <div class="pay-tab active" data-fund="boys">♂ صندوق دعم الرجال</div>
+          <div class="pay-tab" data-fund="girls">♀ صندوق دعم السيدات</div>
+        </div>
+      </div>
+      <div class="pay-tabs">
+        <div class="pay-tab active" data-tab="instapay">إنستاباي</div>
+        <div class="pay-tab" data-tab="cash">فودافون كاش</div>
+        <div class="pay-tab" data-tab="bank">تحويل بنكي</div>
+      </div>
+
+      <div class="pay-panel active" id="panel-instapay">
+        <div class="field">
+          <label>اسم المتبرع (كما هيظهر في السجل)</label>
+          <input type="text" id="name-instapay" placeholder="مثال: أحمد محمد علي">
+        </div>
+        <div class="field">
+          <label>رقم الموبايل أو IPN المرتبط بإنستاباي</label>
+          <input type="text" id="id-instapay" placeholder="01xxxxxxxxx">
+        </div>
+        <div class="field">
+          <label>المبلغ (جنيه)</label>
+          <input type="number" id="amount-instapay" placeholder="300" value="300">
+        </div>
+        <button class="btn btn-gold" style="width:100%" onclick="simulatePay(this,'instapay')">تأكيد الدفع عبر إنستاباي</button>
+      </div>
+
+      <div class="pay-panel" id="panel-cash">
+        <div class="field">
+          <label>اسم المتبرع (كما هيظهر في السجل)</label>
+          <input type="text" id="name-cash" placeholder="مثال: منى سعيد إبراهيم">
+        </div>
+        <div class="field">
+          <label>رقم المحفظة (فودافون كاش / اتصالات كاش / أورنج موني)</label>
+          <input type="text" id="id-cash" placeholder="01xxxxxxxxx">
+        </div>
+        <div class="field">
+          <label>المبلغ (جنيه)</label>
+          <input type="number" id="amount-cash" placeholder="300" value="300">
+        </div>
+        <button class="btn btn-gold" style="width:100%" onclick="simulatePay(this,'cash')">تأكيد التحويل عبر المحفظة</button>
+      </div>
+
+      <div class="pay-panel" id="panel-bank">
+        <div class="field">
+          <label>اسم المتبرع (كما هيظهر في السجل)</label>
+          <input type="text" id="name-bank" placeholder="مثال: كريم وائل فاروق">
+        </div>
+        <div class="field">
+          <label>اختر البنك</label>
+          <select id="bank-select">
+            <option>البنك الأهلي المصري</option>
+            <option>بنك مصر</option>
+            <option>CIB</option>
+            <option>بنك القاهرة</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>اسم صاحب التحويل كما هيظهر في كشف الحساب البنكي</label>
+          <input type="text" id="id-bank" placeholder="مثال: نفس اسم صاحب الحساب المُحوِّل">
+        </div>
+        <div class="field">
+          <label>المبلغ (جنيه)</label>
+          <input type="number" id="amount-bank" placeholder="300" value="300">
+        </div>
+        <button class="btn btn-gold" style="width:100%" onclick="simulatePay(this,'bank')">تأكيد التحويل البنكي</button>
+      </div>
+
+      <div class="pay-note" id="payNote">
+        هذه واجهة عرض فقط لتوضيح تجربة السداد المستقبلية. لضمان أمان أموال الأعضاء، لن يتم تفعيل تحصيل حقيقي إلا بعد فتح حساب مؤسسي موثّق باسم الصندوق (وليس حساب شخصي)، حسب استشارة قانونية.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ledger">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">سجل الانتظام</div>
+      <h2>سجل المساهمين وجدول الاستحقاق</h2>
+      <p>كل عملية سداد بتتسجل هنا بالاسم ورقم المحفظة/إنستاباي أو اسم التحويل البنكي، عشان نعرف مين ملتزم بانتظام ومستحق للدعم عند التقديم.</p>
+    </div>
+    <div class="calc-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+        <span style="font-size:0.9rem; opacity:0.75;">عدد السجلات: <strong id="recordCount" style="color:var(--gold-bright);">0</strong></span>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-glass" style="padding:10px 20px; font-size:0.85rem;" onclick="exportCSV()">تصدير Excel (CSV)</button>
+          <button class="btn btn-glass" style="padding:10px 20px; font-size:0.85rem;" onclick="clearLedger()">تفريغ السجل</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.88rem;" id="ledgerTable">
+          <thead>
+            <tr style="border-bottom:1px solid var(--glass-border); text-align:right;">
+              <th style="padding:12px 10px; opacity:0.7;">الاسم</th>
+              <th style="padding:12px 10px; opacity:0.7;">وسيلة الدفع</th>
+              <th style="padding:12px 10px; opacity:0.7;">الرقم / اسم التحويل</th>
+              <th style="padding:12px 10px; opacity:0.7;">المسار</th>
+              <th style="padding:12px 10px; opacity:0.7;">المبلغ</th>
+              <th style="padding:12px 10px; opacity:0.7;">التاريخ</th>
+              <th style="padding:12px 10px; opacity:0.7;">عدد مرات السداد</th>
+              <th style="padding:12px 10px; opacity:0.7;">الحالة</th>
+            </tr>
+          </thead>
+          <tbody id="ledgerBody">
+            <tr><td colspan="8" style="padding:24px; text-align:center; opacity:0.5;">لسه مفيش عمليات سداد مسجّلة</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.8rem; opacity:0.6; margin-top:20px; line-height:1.8;">
+        <strong>معيار الاستحقاق (تجريبي):</strong> العضو يُعتبر "منتظم ومستحق للدعم" بعد 3 عمليات سداد مسجّلة بنفس الاسم ونفس رقم المحفظة/الحساب. هذا السجل تخزينه محلي داخل هذا المتصفح لأغراض العرض، ولإدارة حقيقية شاملة لكل الأعضاء يُنصح بربطه لاحقًا بجدول بيانات مركزي (Excel / Google Sheets) تديره اللجنة.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">الأمان والشفافية</div>
+      <h2>إزاي بنحمي فلوس الأعضاء</h2>
+    </div>
+    <ul class="trust-list">
+      <li><span class="mark">◆</span><div><strong>حساب مؤسسي مستقل:</strong> الفلوس بتتحفظ في حساب باسم الصندوق مش حساب شخصي لأي فرد، لمنع تضارب المصالح وحماية القائمين عليه قانونيًا.</div></li>
+      <li><span class="mark">◆</span><div><strong>لجنة قرار جماعية:</strong> اعتماد المستفيدين وصرف المبالغ بموافقة لجنة، مش بقرار فردي.</div></li>
+      <li><span class="mark">◆</span><div><strong>كشف حساب دوري معلن:</strong> تقرير شهري لكل الأعضاء يوضح المُحصّل والمصروف وأسماء المستفيدين (بموافقتهم).</div></li>
+      <li><span class="mark">◆</span><div><strong>سند أمانة موثّق:</strong> كل مستفيد يوقّع تعهدًا رسميًا بالسداد المستمر وبرد المبلغ كاملاً حال الطلاق خلال السنة الأولى.</div></li>
+      <li><span class="mark">◆</span><div><strong>مسار تسجيل رسمي:</strong> نعمل على تسجيل الصندوق ككيان معتمد (جمعية أهلية أو تحت مظلة جمعية قائمة) لضمان الحماية القانونية لكل الأطراف.</div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-sm">أسئلة شائعة</div>
+      <h2>محتاج تعرف أكتر؟</h2>
+    </div>
+    <div style="max-width:760px;margin:0 auto;">
+      <div class="faq-item">
+        <div class="faq-q">هل ينضم أي حد للصندوق من غير شروط؟<span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>أيوه، العضوية مفتوحة لأي شخص راغب في المساهمة الشهرية الملتزمة، بدون شروط سن أو دخل.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">ليه لازم أستمر في الدفع 3 سنين بعد ما أستفيد؟<span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>عشان الصندوق يفضل مستمر ويقدر يوصل لأكبر عدد من الشباب المحتاجين، والاستمرار في السداد بعد الاستفادة هو اللي بيحافظ على استدامة الدورة.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">ماذا لو حدث طلاق قبل مرور سنة؟<span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>حسب سند الأمانة الموقّع، يلتزم المستفيد برد كامل المبلغ للصندوق، حماية لحقوق باقي الأعضاء ومنعًا لأي استغلال للمبادرة.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">هل فيه نسبة أو مقابل مادي لإدارة الصندوق؟<span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>لا يُقتطع أي نسبة من مساهمات الأعضاء كأرباح شخصية. أي مصاريف تشغيلية إدارية تُعلن بشكل منفصل وشفاف وتُعتمد من لجنة الصندوق، حفاظًا على نية العمل الخيري.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">هل الصندوق مسجل رسميًا؟<span class="faq-icon">+</span></div>
+        <div class="faq-a"><p>نعمل حاليًا على استكمال إجراءات التسجيل الرسمي كجمعية أهلية أو تحت مظلة جمعية معتمدة، لضمان الحماية القانونية لكل الأعضاء.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="du3a">«اللهم بارك في هذا العمل واجعله عونًا صادقًا لعبادك»</div>
+  سَنَد © 2026 — صندوق تكافل مجتمعي · هذا الموقع نموذج توضيحي لعرض الفكرة قبل التسجيل الرسمي
+</footer>
+
+<script>
+// Nav smooth scroll (robust against sticky header overlap)
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+  link.addEventListener('click', (e)=>{
+    const targetId = link.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if(target){
+      e.preventDefault();
+      const navHeight = document.querySelector('nav').offsetHeight;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 10;
+      window.scrollTo({top, behavior:'smooth'});
+    }
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
+
+// Fund selector (boys / girls)
+let selectedFund = 'boys';
+const fundLabels = {boys:'صندوق دعم الرجال', girls:'صندوق دعم السيدات'};
+document.querySelectorAll('#fundTabs .pay-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#fundTabs .pay-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    selectedFund = tab.dataset.fund;
+  });
+});
+
+// Pay tabs (payment method) - scoped to avoid clashing with the fund selector tabs
+const methodTabsContainer = document.querySelectorAll('.pay-tabs')[1]; // second .pay-tabs group = payment methods
+methodTabsContainer.querySelectorAll('.pay-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    methodTabsContainer.querySelectorAll('.pay-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.pay-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+const methodLabels = {instapay:'إنستاباي', cash:'محفظة إلكترونية', bank:'تحويل بنكي'};
+
+const hasCloudStorage = typeof window.storage !== 'undefined' && window.storage;
+
+async function getLedger(){
+  try{
+    if(hasCloudStorage){
+      const res = await window.storage.get('donations-ledger', false);
+      return res ? JSON.parse(res.value) : [];
+    }
+    const raw = localStorage.getItem('sanad-donations-ledger');
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){
+    return [];
+  }
+}
+async function saveLedger(ledger){
+  try{
+    if(hasCloudStorage){
+      await window.storage.set('donations-ledger', JSON.stringify(ledger), false);
+    }else{
+      localStorage.setItem('sanad-donations-ledger', JSON.stringify(ledger));
+    }
+  }catch(e){
+    console.error('تعذر حفظ السجل', e);
+  }
+}
+
+function normalize(str){
+  return (str||'').trim().toLowerCase().replace(/\s+/g,' ');
+}
+
+async function renderLedger(){
+  const ledger = await getLedger();
+  const tbody = document.getElementById('ledgerBody');
+  document.getElementById('recordCount').textContent = ledger.length;
+
+  if(ledger.length === 0){
+    tbody.innerHTML = '<tr><td colspan="8" style="padding:24px; text-align:center; opacity:0.5;">لسه مفيش عمليات سداد مسجّلة</td></tr>';
+    return;
+  }
+
+  // count occurrences per name+identifier to determine regularity
+  const counts = {};
+  ledger.forEach(r=>{
+    const key = normalize(r.name)+'|'+normalize(r.identifier);
+    counts[key] = (counts[key]||0) + 1;
+  });
+
+  tbody.innerHTML = ledger.slice().reverse().map(r=>{
+    const key = normalize(r.name)+'|'+normalize(r.identifier);
+    const count = counts[key];
+    const eligible = count >= 3;
+    return `<tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+      <td style="padding:12px 10px;">${r.name}</td>
+      <td style="padding:12px 10px;">${methodLabels[r.method]||r.method}</td>
+      <td style="padding:12px 10px; direction:ltr; text-align:right;">${r.identifier}</td>
+      <td style="padding:12px 10px;">${r.fund === 'boys' ? 'الرجال' : 'السيدات'}</td>
+      <td style="padding:12px 10px;">${r.amount} ج.م</td>
+      <td style="padding:12px 10px; opacity:0.7;">${r.date}</td>
+      <td style="padding:12px 10px; text-align:center;">${count}</td>
+      <td style="padding:12px 10px;">
+        <span style="padding:4px 12px; border-radius:100px; font-size:0.78rem; ${eligible ? 'background:rgba(15,92,76,0.35); color:#8fd9c4;' : 'background:rgba(201,168,106,0.15); color:var(--gold-bright);'}">
+          ${eligible ? 'منتظم ✓ مستحق' : 'قيد التجميع'}
+        </span>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function logDonation(method){
+  const name = document.getElementById('name-'+method).value.trim();
+  const identifier = document.getElementById('id-'+method).value.trim();
+  const amount = document.getElementById('amount-'+method).value || '0';
+
+  if(!name || !identifier){
+    alert('من فضلك اكتب الاسم ورقم المحفظة/إنستاباي أو اسم التحويل البنكي قبل التأكيد.');
+    return false;
+  }
+
+  const ledger = await getLedger();
+  ledger.push({
+    name, identifier, amount,
+    method, fund: selectedFund,
+    date: new Date().toLocaleDateString('ar-EG')
+  });
+  await saveLedger(ledger);
+  await renderLedger();
+  return true;
+}
+
+async function exportCSV(){
+  const ledger = await getLedger();
+  if(ledger.length === 0){ alert('مفيش سجلات لتصديرها بعد.'); return; }
+  const headers = ['الاسم','وسيلة الدفع','الرقم/اسم التحويل','المسار','المبلغ','التاريخ'];
+  const rows = ledger.map(r => [
+    r.name, methodLabels[r.method]||r.method, r.identifier,
+    r.fund === 'boys' ? 'الرجال' : 'السيدات', r.amount, r.date
+  ]);
+  const csvContent = '\uFEFF' + [headers, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob = new Blob([csvContent], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'سجل_المساهمين_سند.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function clearLedger(){
+  if(!confirm('هل أنت متأكد من تفريغ سجل المساهمين بالكامل؟ هذا الإجراء لا يمكن التراجع عنه.')) return;
+  await saveLedger([]);
+  await renderLedger();
+  await updateCounters();
+}
+
+function animateCounter(el, from, to, duration=900){
+  const start = performance.now();
+  function tick(now){
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const value = Math.round(from + (to - from) * eased);
+    el.textContent = value.toLocaleString('en-US');
+    if(progress < 1) requestAnimationFrame(tick);
+    else el.textContent = to.toLocaleString('en-US');
+  }
+  requestAnimationFrame(tick);
+}
+
+async function updateCounters(){
+  const ledger = await getLedger();
+  const totalEl = document.getElementById('counterTotal');
+  const boysEl = document.getElementById('counterBoys');
+  const girlsEl = document.getElementById('counterGirls');
+  const donorsEl = document.getElementById('counterDonors');
+
+  const total = ledger.reduce((s,r)=> s + (parseFloat(r.amount)||0), 0);
+  const boysTotal = ledger.filter(r=>r.fund==='boys').reduce((s,r)=> s + (parseFloat(r.amount)||0), 0);
+  const girlsTotal = ledger.filter(r=>r.fund==='girls').reduce((s,r)=> s + (parseFloat(r.amount)||0), 0);
+  const uniqueDonors = new Set(ledger.map(r => normalize(r.name)+'|'+normalize(r.identifier))).size;
+
+  animateCounter(totalEl, +totalEl.textContent.replace(/,/g,'')||0, total);
+  animateCounter(boysEl, +boysEl.textContent.replace(/,/g,'')||0, boysTotal);
+  animateCounter(girlsEl, +girlsEl.textContent.replace(/,/g,'')||0, girlsTotal);
+  animateCounter(donorsEl, +donorsEl.textContent.replace(/,/g,'')||0, uniqueDonors);
+}
+
+renderLedger();
+updateCounters();
+
+function simulatePay(btn, method){
+  const note = document.getElementById('payNote');
+  btn.textContent = 'جاري المعالجة...';
+  btn.disabled = true;
+  logDonation(method).then(ok=>{
+    if(!ok){
+      btn.textContent = btn.dataset.originalText || btn.textContent;
+      btn.disabled = false;
+      return;
+    }
+    setTimeout(()=>{
+      btn.textContent = '✓ تم استلام طلب السداد (تجريبي)';
+      note.innerHTML = `هذه محاكاة فقط لتجربة المستخدم. تم تسجيل توجيه تبرعك إلى <strong>${fundLabels[selectedFund]}</strong> وإضافته لسجل المساهمين بالأسفل. لا يتم تحصيل أي مبلغ فعلي حاليًا حتى استكمال ربط بوابة دفع حقيقية موثقة باسم الصندوق الرسمي.`;
+      note.style.background = 'rgba(15,92,76,0.25)';
+      note.style.borderColor = 'rgba(232,201,136,0.4)';
+      btn.disabled = false;
+      updateCounters();
+    }, 900);
+  });
+}
+
+// Calculator
+const FIXED_BENEFICIARIES = 3;
+function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+
+function setupCalc(prefix){
+  const membersEl = document.getElementById('members'+prefix);
+  const contribEl = document.getElementById('contrib'+prefix);
+  function update(){
+    const members = +membersEl.value;
+    const contrib = +contribEl.value;
+    const monthlyTotal = members * contrib;
+    const perPerson = Math.floor(monthlyTotal / FIXED_BENEFICIARIES);
+    document.getElementById('members'+prefix+'Val').textContent = fmt(members);
+    document.getElementById('contrib'+prefix+'Val').textContent = fmt(contrib);
+    document.getElementById('monthlyTotal'+prefix).textContent = fmt(monthlyTotal);
+    document.getElementById('perPerson'+prefix).textContent = fmt(perPerson);
+  }
+  [membersEl, contribEl].forEach(el=>el.addEventListener('input', update));
+  update();
+}
+setupCalc('M');
+setupCalc('W');
+
+// subtle parallax on hero verse card
+document.addEventListener('mousemove', (e)=>{
+  const card = document.querySelector('.verse-card');
+  if(!card) return;
+  const x = (e.clientX / window.innerWidth - 0.5) * 6;
+  const y = (e.clientY / window.innerHeight - 0.5) * -6;
+  card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+</script>
+
+</body>
+</html>
